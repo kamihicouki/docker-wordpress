@@ -1,0 +1,33 @@
+version: '2'
+
+db:
+  image: mariadb:latest
+  environment:
+    MYSQL_ROOT_PASSWORD: 8DeOyVZIsXk0JqVf
+app:
+  image: wordpress:fpm
+  expose:
+    - "9000"
+  volumes:
+    - appdata:/var/www/html
+web:
+  image: nginx:latest
+  ports:
+    - "80"
+    - "443"
+  links:
+    - cms
+  volumes_from:
+    - cms
+  environment:
+    VIRTUAL_HOST: www.woee.net,woee.net
+
+networks:
+  backEnd:
+  frontEnd:
+
+volumes:
+  appData:
+    driver: local
+  dbData:
+    driver: local

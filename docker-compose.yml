@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "8DeOyVZIsXk0JqVf"
+    networks:
+      -
+  cms:
+    image: wordpress:latest
+    volumes:
+      - /var/www/html
+
+networks:
+volumes:
+/var/lib/mysql
