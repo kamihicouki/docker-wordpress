@@ -10,7 +10,7 @@ services:
     expose:
       - "3306"
     volumes:
-      - dbData:/var/lib/mysql
+      - db:/var/lib/mysql
   app:
     image: wordpress:fpm
     networks:
@@ -23,19 +23,19 @@ services:
     image: nginx:latest
     networks:
       - default
-      - frontEnd
+      - front
     ports:
       - "80"
       - "443"
     volumes:
-      - appdata:/var/www/html
+      - app:/var/www/html
 
 networks:
-  frontEnd:
+  front:
     driver: bridge
 
 volumes:
-  appData:
+  app:
     driver: local
-  dbData:
+  db:
     driver: local
