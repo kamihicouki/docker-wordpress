@@ -1,10 +1,10 @@
 version: '2'
 
 services:
-  mysql:
+  db:
     image: mariadb:latest
-    env_file:
-      - "./common_variable"
+    environment:
+      MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
     networks:
       - default
     expose:
@@ -13,8 +13,8 @@ services:
       - /var/lib/mysql
   app:
     image: wordpress:fpm
-    env_file:
-      - "./common_variable"
+    links:
+      - "db:mysql"
     networks:
       - default
     expose:
