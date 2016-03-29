@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  db:
+  mysql:
     image: mariadb:latest
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
@@ -15,8 +15,6 @@ services:
     image: wordpress:fpm
     networks:
       - default
-    links:
-      - "db:mysql"
     expose:
       - "9000"
     volumes:
