@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
+      WORDPRESS_DB_PASSWORD: "MYSQL_ROOT_PASSWORD"
     networks:
       - default
     expose:
@@ -25,19 +25,8 @@ services:
     image: nginx:latest
     networks:
       - default
-      - front
     ports:
       - "80"
       - "443"
     volumes_from:
       - app:ro
-
-networks:
-  front:
-    driver: bridge
-
-volumes:
-  app:
-    driver: local
-  db:
-    driver: local
