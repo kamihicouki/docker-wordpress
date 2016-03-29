@@ -31,3 +31,5 @@ services:
       - "443"
     volumes_from:
       - app:ro
+    volumes:
+      - "./default.conf:/etc/nginx/conf.d/default.conf:ro"
