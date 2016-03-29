@@ -13,8 +13,9 @@ services:
       - /var/lib/mysql
   app:
     image: wordpress:fpm
-    links:
-      - "db:mysql"
+    environment:
+      WORDPRESS_DB_HOST: "db"
+      WORDPRESS_DB_PASSWORD: "MYSQL_ROOT_PASSWORD"
     networks:
       - default
     expose:
