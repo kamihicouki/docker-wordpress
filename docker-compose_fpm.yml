@@ -11,7 +11,7 @@ services:
     expose:
       - "3306"
     volumes:
-      - db:/var/lib/mysql
+      - /var/lib/mysql
   app:
     image: wordpress:fpm
     networks:
@@ -19,7 +19,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - app:/var/www/html
+      - /var/www/html
   web:
     image: nginx:latest
     networks:
@@ -28,8 +28,8 @@ services:
     ports:
       - "80"
       - "443"
-    volumes:
-      - app:/var/www/html
+    volumes_from:
+      - app:ro
 
 networks:
   front:
