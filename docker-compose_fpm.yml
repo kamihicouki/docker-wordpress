@@ -5,6 +5,7 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: "MYSQL_ROOT_PASSWORD"
+      WORDPRESS_DB_HOST: "db:3306"
     networks:
       - default
     expose:
