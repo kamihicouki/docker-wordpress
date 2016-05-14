@@ -6,4 +6,4 @@ RUN \
   && mv wp-cli.phar /usr/local/bin/wp
   
 RUN \
-  echo 'alias wp='wp --allow-root'' >> $HOME/.bashrc
+  echo 'alias wp="wp --allow-root"' >> $HOME/.bashrc
