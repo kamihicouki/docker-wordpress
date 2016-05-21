@@ -1,0 +1,55 @@
+---
+version: '2'
+
+services:
+  db:
+    image: mariadb:latest
+    mem_limit: 300mb
+    environment:
+      MYSQL_ROOT_PASSWORD: "SECRET_PASSWORD"
+    networks:
+      - default
+    expose:
+      - "3306"
+    volumes:
+      - "db:/var/lib/mysql"
+  app:
+    image: wordpress:fpm
+    mem_limit: 300mb
+    depends_on:
+      - "db"
+    environment:
+      WORDPRESS_DB_HOST: "db"
+      WORDPRESS_DB_PASSWORD: "SECRET_PASSWORD"
+    networks:
+      - default
+    expose:
+      - "9000"
+    volumes:
+      - "app:/var/www/html"
+  web:
+    image: nginx:latest
+    mem_limit: 300mb
+    depends_on:
+      - "app"
+    ports:
+      - "80"
+      - "443"
+    networks:
+      default:
+      front.web:
+        aliases:
+          - "my.aliases.domain"
+    volumes:
+      - "app:/var/www/html:ro"
+      - "./wordpress.conf:/etc/nginx/conf.d/default.conf:ro"
+
+networks:
+  front.web:
+#    external: true
+
+volumes:
+  app:
+    driver: local
+  db:
+    driver: local
